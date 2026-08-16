@@ -1,32 +1,58 @@
-# Enterprise Multi-Site Network Lab
+<div align="center">
 
-A practical Cisco enterprise networking project designed and implemented in Cisco Packet Tracer to simulate a headquarters and branch-office environment with segmentation, redundancy, dynamic routing, centralized services, and Layer 2 security controls.
+# 🌐 Enterprise Multi-Site Network Lab
 
-## Project Objective
+### Cisco enterprise network design, implementation, security & troubleshooting
 
-The goal of this lab was to design a realistic multi-site enterprise network rather than a simple classroom topology. The environment was built to demonstrate how separate business departments, voice devices, CCTV systems, servers, redundant core infrastructure, and remote branches can communicate securely across a routed WAN.
+![Cisco](https://img.shields.io/badge/Cisco-IOS-1BA0D7?style=for-the-badge&logo=cisco&logoColor=white)
+![OSPF](https://img.shields.io/badge/Routing-OSPF-2F80ED?style=for-the-badge)
+![HSRP](https://img.shields.io/badge/Redundancy-HSRP-27AE60?style=for-the-badge)
+![Security](https://img.shields.io/badge/Network-Security-EB5757?style=for-the-badge)
+![Packet Tracer](https://img.shields.io/badge/Lab-Packet%20Tracer-F2C94C?style=for-the-badge)
 
-## Architecture
+A self-directed Cisco Packet Tracer project simulating a **redundant headquarters and branch-office network** with departmental segmentation, dynamic WAN routing, centralized services and Layer-2 security controls.
+
+</div>
+
+---
+
+## 🗺️ Network Topology
+
+![Enterprise Multi-Site Network Topology](screenshots/01-full-topology.png)
+
+## ✨ Project Highlights
+
+| Area | Implementation |
+|---|---|
+| 🏢 Campus design | Redundant HQ core with departmental access switching |
+| 🌍 WAN routing | OSPF Area 0 between HQ and Branch 1 |
+| 🔁 Gateway redundancy | HSRP virtual gateways across HQ core switches |
+| 🔗 Link redundancy | LACP EtherChannel between HQ cores |
+| 🧩 Segmentation | IT, Finance, HR, Staff, Voice, CCTV and Server VLANs |
+| 📡 Central services | DHCP, DNS, Web, File, AAA, Syslog and NVR |
+| 🛡️ Security | ACLs, Port Security, DHCP Snooping, DAI, BPDU Guard |
+| 🧰 Troubleshooting | OSPF, HSRP, DHCP, gateway, VLAN and port-security faults |
+
+## 🏗️ Architecture
 
 ### Headquarters
 - Dual Cisco multilayer core switches
-- Redundant HSRP default gateways
+- HSRP default-gateway redundancy
 - LACP EtherChannel between core switches
-- Department access switches for IT, Finance, HR, and Staff
+- Department access switches for IT, Finance, HR and Staff
 - Dedicated server access switch
-- Central DHCP, DNS, Web, File, AAA, Syslog, and NVR services
-- Voice and CCTV VLANs
+- Voice and CCTV segmentation
+- Central DHCP, DNS, Web, File, AAA, Syslog and NVR services
 
 ### Branch 1
 - Cisco branch router
 - Multilayer core switch
-- Layer 2 access switch
-- Departmental VLANs for IT, Finance, HR, and Staff
-- Voice and CCTV segmentation
+- Layer-2 access switch
+- Departmental VLAN segmentation
 - Centralized DHCP delivered from HQ using DHCP relay
-- OSPF routing across the WAN
+- OSPF connectivity across the WAN
 
-## Addressing Strategy
+## 📐 Addressing Strategy
 
 | Site | Address Space |
 |---|---|
@@ -34,92 +60,61 @@ The goal of this lab was to design a realistic multi-site enterprise network rat
 | Branch 1 | `10.20.0.0/16` |
 | WAN / Transit | `10.255.0.0/16` |
 
-### HQ VLANs
+### VLAN Plan
 
-| VLAN | Purpose | Subnet | Gateway |
+| VLAN | Purpose | HQ Gateway | Branch 1 Gateway |
 |---|---|---|---|
-| 20 | IT | `10.10.20.0/24` | `10.10.20.1` |
-| 30 | Finance | `10.10.30.0/24` | `10.10.30.1` |
-| 40 | HR | `10.10.40.0/24` | `10.10.40.1` |
-| 50 | Staff | `10.10.50.0/24` | `10.10.50.1` |
-| 60 | Voice | `10.10.60.0/24` | `10.10.60.1` |
-| 70 | CCTV | `10.10.70.0/24` | `10.10.70.1` |
-| 80 | Servers | `10.10.80.0/24` | `10.10.80.1` |
+| 20 | IT | `10.10.20.1` | `10.20.20.1` |
+| 30 | Finance | `10.10.30.1` | `10.20.30.1` |
+| 40 | HR | `10.10.40.1` | `10.20.40.1` |
+| 50 | Staff | `10.10.50.1` | `10.20.50.1` |
+| 60 | Voice | `10.10.60.1` | `10.20.60.1` |
+| 70 | CCTV | `10.10.70.1` | `10.20.70.1` |
+| 80 | Servers | `10.10.80.1` | — |
 | 999 | Native / Blackhole | N/A | N/A |
 
-### Branch 1 VLANs
+## 🔧 Technologies Implemented
 
-| VLAN | Purpose | Subnet | Gateway |
-|---|---|---|---|
-| 20 | IT | `10.20.20.0/24` | `10.20.20.1` |
-| 30 | Finance | `10.20.30.0/24` | `10.20.30.1` |
-| 40 | HR | `10.20.40.0/24` | `10.20.40.1` |
-| 50 | Staff | `10.20.50.0/24` | `10.20.50.1` |
-| 60 | Voice | `10.20.60.0/24` | `10.20.60.1` |
-| 70 | CCTV | `10.20.70.0/24` | `10.20.70.1` |
+`VLANs` · `802.1Q Trunking` · `Inter-VLAN Routing` · `HSRP` · `LACP EtherChannel` · `OSPF` · `DHCP Relay` · `ACLs` · `Port Security` · `DHCP Snooping` · `Dynamic ARP Inspection` · `PortFast` · `BPDU Guard`
 
-## Technologies Implemented
+## 🧪 Verification Evidence
 
-- VLAN segmentation
-- 802.1Q trunking
-- Inter-VLAN routing on multilayer switches
-- HSRP gateway redundancy at HQ
-- LACP EtherChannel between HQ cores
-- OSPF Area 0 dynamic routing
-- Routed point-to-point links
-- Centralized DHCP
-- DHCP relay using `ip helper-address`
-- Access Control Lists
-- Port Security with sticky MAC learning
-- DHCP Snooping
-- Dynamic ARP Inspection
-- PortFast and BPDU Guard
-- Voice VLANs
-- CCTV isolation
-- Native VLAN blackholing
+### HQ Core Redundancy
+![HQ Core Redundancy](screenshots/02-hq-core-redundancy.png)
 
-## Central Services
+### OSPF Routing
+![OSPF Routing](screenshots/03-ospf-routing.png)
 
-| Service | Address |
-|---|---|
-| DHCP | `10.10.80.10` |
-| DNS | `10.10.80.11` |
-| Web | `10.10.80.12` |
-| File | `10.10.80.13` |
-| AAA | `10.10.80.14` |
-| Syslog | `10.10.80.15` |
-| NVR | `10.10.80.20` |
+### HSRP Status
+![HSRP Status](screenshots/04-hsrp-status.png)
 
-## Security Design
+### Branch DHCP
+![Branch DHCP](screenshots/05-branch-dhcp.png)
 
-The network uses segmentation and Layer 2 protections rather than placing all endpoints into a flat LAN.
+### Branch-to-HQ Connectivity
+![Branch to HQ Connectivity](screenshots/06-branch-hq-ping.png)
 
-Examples include:
+### Port Security
+![Port Security](screenshots/07-port-security.png)
 
-- CCTV devices are restricted from accessing sensitive departmental networks.
-- Staff, HR, and Finance access is controlled using extended ACLs.
-- IT remains the privileged administrative network.
-- Access ports use PortFast and BPDU Guard.
-- User-facing ports use sticky MAC port security.
-- DHCP Snooping protects against unauthorized DHCP servers.
-- Dynamic ARP Inspection helps mitigate ARP spoofing attacks.
-- VLAN 999 is used as an unused native/blackhole VLAN.
+### VLAN Trunking
+![VLAN Trunks](screenshots/08-vlan-trunks.png)
 
-## Troubleshooting Case Study
+## 🧠 Troubleshooting Work
 
-A major part of this project involved identifying and resolving real configuration faults rather than simply entering known-good commands.
+The project included diagnosing and resolving configuration faults rather than simply entering a known-good configuration.
 
-Issues diagnosed during implementation included:
+Key issues resolved included:
 
 1. OSPF routes present in the LSDB but temporarily absent from the routing table.
-2. Duplicate and stale HSRP configuration copied from HQ into Branch 1.
-3. Duplicate Layer 3 gateway IP addresses accidentally configured on the Branch access switch.
-4. Incorrect Branch DHCP pool start addresses using HQ subnets.
-5. Port-security violations caused by sticky MAC entries.
-6. A routed multilayer-switch uplink temporarily showing IP processing disabled.
+2. Duplicate/stale HSRP configuration copied from HQ into Branch 1.
+3. Duplicate Layer-3 gateway addresses accidentally configured on the Branch access switch.
+4. Branch DHCP pools using incorrect HQ subnet addresses.
+5. Port-security violations involving sticky MAC learning.
+6. Incorrect endpoint access-port and VLAN configuration.
 7. Intermittent connectivity caused by conflicting gateway configuration.
 
-The faults were isolated using commands such as:
+Verification commands included:
 
 ```text
 show ip route
@@ -135,45 +130,31 @@ show ip dhcp snooping
 ping
 ```
 
-This troubleshooting process reinforced a structured approach of testing Layer 1/2 connectivity, validating gateways and VLANs, checking route propagation, verifying return paths, and only then investigating application services such as DHCP.
+## 📁 Documentation
 
-## Verification
+- [IP Addressing Plan](documentation/ip-addressing.md)
+- [Routing Design](documentation/routing-design.md)
+- [Security Controls](documentation/security-controls.md)
+- [Troubleshooting Notes](documentation/troubleshooting.md)
+- `packet-tracer/` — working Cisco Packet Tracer lab file
+- `screenshots/` — implementation and verification evidence
 
-Successful testing included:
+## 🚀 Next Development Phase
 
-- Department endpoints receiving addresses through DHCP
-- Branch clients receiving centrally assigned DHCP leases from HQ
-- Inter-VLAN routing at HQ and Branch 1
-- OSPF adjacency between HQ and Branch routers
-- Branch-to-HQ connectivity across the WAN
-- Access to centralized HQ services from Branch 1
-- HSRP operation between HQ core switches
-- LACP EtherChannel operation between HQ cores
-- Security controls active on access switches
+Planned evolution of the project:
 
-## Repository Structure
+**Packet Tracer → Cisco Modeling Labs → Ansible → pyATS validation → controlled deployment workflow**
 
-```text
-enterprise-multisite-network-lab/
-├── README.md
-├── topology/
-├── configs/
-├── documentation/
-│   ├── ip-addressing.md
-│   ├── routing-design.md
-│   ├── security-controls.md
-│   └── troubleshooting.md
-└── verification/
-```
-
-## Next Development Phase
-
-Planned improvements include additional branch sites, network automation using Ansible, validation using pyATS, migration of the design into Cisco Modeling Labs, and eventually applying the same configuration-as-code workflow to physical Cisco equipment.
-
-## Skills Demonstrated
-
-Cisco IOS · Enterprise Networking · VLANs · Layer 2 Switching · Layer 3 Switching · OSPF · HSRP · EtherChannel · DHCP · ACLs · Port Security · DHCP Snooping · Dynamic ARP Inspection · Network Troubleshooting · WAN Design
+Future development may include additional branches, configuration automation, automated validation and physical Cisco hardware testing.
 
 ---
 
+<div align="center">
+
+### Skills Demonstrated
+
+**Cisco IOS · Enterprise Networking · Switching · Routing · OSPF · HSRP · EtherChannel · DHCP · ACLs · Layer-2 Security · Network Troubleshooting · WAN Design**
+
 **Portfolio project by Sameer Raut**
+
+</div>
