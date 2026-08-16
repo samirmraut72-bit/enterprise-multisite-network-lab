@@ -1,0 +1,1 @@
+HSRP verification: HQ-CORE1 is Active for VLANs 20, 30, 40, 50, 60, 70 and 80. HQ-CORE2 addresses 10.10.x.3 appear as Standby peers and the virtual gateways are 10.10.x.1. The corresponding image is being maintained as the portfolio HSRP evidence.
